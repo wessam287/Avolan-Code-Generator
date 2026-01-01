@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AvolanOS 2.0 – 64 Codes Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: rgba(15, 23, 42, 0.9);
+      padding: 32px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 420px;
+      border: 1px solid #1f2937;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    h1 {
+      margin: 0 0 10px;
+      color: #f97316;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    p {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+    .code-box {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px dashed #475569;
+      background: rgba(2, 6, 23, 0.8);
+      font-family: monospace;
+      font-size: 1rem;
+      color: #fbbf24;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>64 Codes</h1>
+    <p>Your AvolanOS 2.0 code has been generated.</p>
+
+    <div id="codeBox" class="code-box">Loading...</div>
+  </div>
+
+  <script>
+    function generateCode() {
+      const now = Date.now();
+
+      // AvolanOS logic: 45-minute cycle = UNIQUE, otherwise SIMPLE
+      const isUnique = ((now / 1000 / 60) % 45) < 1;
+      const type = isUnique ? 'UNIQUE' : 'SIMPLE';
+
+      // Seed based only on time (no country)
+      const seed = btoa(now.toString())
+        .replace(/[^a-zA-Z0-9]/g, '')
+        .slice(0, 12);
+
+      const code = `${type}-${seed}`;
+
+      document.getElementById('codeBox').textContent = code;
+    }
+
+    generateCode();
+  </script>
+</body>
+</html>
